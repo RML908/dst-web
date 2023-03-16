@@ -1,26 +1,26 @@
 <div
-  class="fuse-alert-container"
+  class="custom-alert-container"
   *ngIf="!dismissible || dismissible && !dismissed"
   [@fadeIn]="!dismissed"
   [@fadeOut]="!dismissed">
 
   <!-- Border -->
   <div
-    class="fuse-alert-border"
+    class="custom-alert-border"
     *ngIf="appearance === 'border'"></div>
 
   <!-- Icon -->
   <div
-    class="fuse-alert-icon"
+    class="custom-alert-icon"
     *ngIf="showIcon">
 
     <!-- Custom icon -->
-    <div class="fuse-alert-custom-icon">
+    <div class="custom-alert-custom-icon">
       <ng-content select="[fuseAlertIcon]"></ng-content>
     </div>
 
     <!-- Default icons -->
-    <div class="fuse-alert-default-icon">
+    <div class="custom-alert-default-icon">
 
       <mat-icon
         *ngIf="type === 'primary'"
@@ -59,13 +59,13 @@
   </div>
 
   <!-- Content -->
-  <div class="fuse-alert-content">
+  <div class="custom-alert-content">
 
-    <div class="fuse-alert-title">
+    <div class="custom-alert-title">
       <ng-content select="[fuseAlertTitle]"></ng-content>
     </div>
 
-    <div class="fuse-alert-message">
+    <div class="custom-alert-message">
       <ng-content></ng-content>
     </div>
 
@@ -73,7 +73,7 @@
 
   <!-- Dismiss button -->
   <button
-    class="fuse-alert-dismiss-button"
+    class="custom-alert-dismiss-button"
     mat-icon-button
     (click)="dismiss()">
     <mat-icon [svgIcon]="'heroicons_solid:x'"></mat-icon>

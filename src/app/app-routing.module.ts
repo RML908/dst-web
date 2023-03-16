@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {AuthSignInComponent} from "./modules/auth/sign-in/sign-in.component";
 
-const routes: Routes = [
+export const routes: Routes = [
 
   {path: ' ', pathMatch : 'full', redirectTo: 'sign-in'  },
   {

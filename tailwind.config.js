@@ -1,10 +1,33 @@
-/** @type {import('tailwindcss').Config} */
-const generatePalette = require(path.resolve(__dirname, ('src/@fuse/tailwind/utilities/generate-palette')));
 const path = require("path");
+const generatePalette = require(path.resolve(__dirname, ('src/app/utilities/tailwind/utils/generate-palette')));
+const colors = require("tailwindcss/colors");
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 const customPalettes = {
   brand: generatePalette('#2196F3')
 };
+
+const themes = {
+  // Default theme is required for theming system to work correctly
+  'default': {
+    primary: {
+      ...colors.indigo,
+      DEFAULT: colors.indigo[600]
+    },
+    accent: {
+      ...colors.slate,
+      DEFAULT: colors.slate[800]
+    },
+    warn: {
+      ...colors.red,
+      DEFAULT: colors.red[600]
+    },
+    'on-warn': {
+      500: colors.red['50']
+    }
+  }
+}
+
 const config = {
   darkMode   : 'class',
   content    : ['./src/**/*.{html,scss,ts}'],
@@ -134,61 +157,61 @@ const config = {
       typography: ({theme}) => ({
         DEFAULT: {
           css: {
-            color              : 'var(--fuse-text-default)',
+            color              : 'var(--custom-text-default)',
             '[class~="lead"]'  : {
-              color: 'var(--fuse-text-secondary)'
+              color: 'var(--custom-text-secondary)'
             },
             a                  : {
-              color: 'var(--fuse-primary-500)'
+              color: 'var(--custom-primary-500)'
             },
             strong             : {
-              color: 'var(--fuse-text-default)'
+              color: 'var(--custom-text-default)'
             },
             'ol > li::before'  : {
-              color: 'var(--fuse-text-secondary)'
+              color: 'var(--custom-text-secondary)'
             },
             'ul > li::before'  : {
-              backgroundColor: 'var(--fuse-text-hint)'
+              backgroundColor: 'var(--custom-text-hint)'
             },
             hr                 : {
-              borderColor: 'var(--fuse-border)'
+              borderColor: 'var(--custom-border)'
             },
             blockquote         : {
-              color          : 'var(--fuse-text-default)',
-              borderLeftColor: 'var(--fuse-border)'
+              color          : 'var(--custom-text-default)',
+              borderLeftColor: 'var(--custom-border)'
             },
             h1                 : {
-              color: 'var(--fuse-text-default)'
+              color: 'var(--custom-text-default)'
             },
             h2                 : {
-              color: 'var(--fuse-text-default)'
+              color: 'var(--custom-text-default)'
             },
             h3                 : {
-              color: 'var(--fuse-text-default)'
+              color: 'var(--custom-text-default)'
             },
             h4                 : {
-              color: 'var(--fuse-text-default)'
+              color: 'var(--custom-text-default)'
             },
             'figure figcaption': {
-              color: 'var(--fuse-text-secondary)'
+              color: 'var(--custom-text-secondary)'
             },
             code               : {
-              color     : 'var(--fuse-text-default)',
+              color     : 'var(--custom-text-default)',
               fontWeight: '500'
             },
             'a code'           : {
-              color: 'var(--fuse-primary)'
+              color: 'var(--custom-primary)'
             },
             pre                : {
               color          : theme('colors.white'),
               backgroundColor: theme('colors.gray.800')
             },
             thead              : {
-              color            : 'var(--fuse-text-default)',
-              borderBottomColor: 'var(--fuse-border)'
+              color            : 'var(--custom-text-default)',
+              borderBottomColor: 'var(--custom-border)'
             },
             'tbody tr'         : {
-              borderBottomColor: 'var(--fuse-border)'
+              borderBottomColor: 'var(--custom-border)'
             },
             'ol[type="A" s]'   : false,
             'ol[type="a" s]'   : false,
@@ -223,9 +246,9 @@ const config = {
   },
   plugins    : [
 
-    // Fuse - Tailwind plugins
-    require(path.resolve(__dirname, ('src/@utilities/tailwind/plugins/utilities'))),
-    require(path.resolve(__dirname, ('src/@utilities/tailwind/plugins/icon-size'))),
+    // custom - Tailwind plugins
+    require(path.resolve(__dirname, ('src/app/utilities/tailwind/plugins/utilities'))),
+    require(path.resolve(__dirname, ('src/app/utilities/tailwind/plugins/icon-size'))),
 
     // Other third party and/or custom plugins
     require('@tailwindcss/typography')({modifiers: ['sm', 'lg']}),

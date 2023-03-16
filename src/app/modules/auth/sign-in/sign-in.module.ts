@@ -13,21 +13,21 @@ import {AuthSignInComponent} from "./sign-in.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {DstAlertModule} from "../../../components/alert";
 
-
 @NgModule({
   declarations: [
     AuthSignInComponent
   ],
-  imports: [
-    RouterModule.forChild(authSignInRoutes),
-    MatButtonModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    ReactiveFormsModule,
-    DstAlertModule
-  ]
+    imports: [
+        RouterModule.forChild(authSignInRoutes),
+        MatButtonModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        ReactiveFormsModule,
+        DstAlertModule,
+        CommonModule,
+    ]
 })
 export class AuthSignInModule { }
