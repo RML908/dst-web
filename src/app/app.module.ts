@@ -12,12 +12,17 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatIconModule} from "@angular/material/icon";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatButtonModule} from "@angular/material/button";
-import {RouterModule} from "@angular/router";
+import {ExtraOptions, PreloadAllModules, RouterModule} from "@angular/router";
 import {AuthGuard} from "./core/auth/guards/auth.guard";
-import {AuthService} from "./core/auth/auth.service";
 import {AuthSignInModule} from "./modules/auth/sign-in/sign-in.module";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { HttpClientModule} from "@angular/common/http";
+import {IconsModule} from "./core/icons/icons.module";
+import { routes } from './app-routing.module';
 
+const routerConfig: ExtraOptions = {
+  preloadingStrategy       : PreloadAllModules,
+  scrollPositionRestoration: 'enabled'
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +31,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(routes, routerConfig),
     ReactiveFormsModule,
     MatFormFieldModule,
     MatCheckboxModule,
@@ -33,8 +39,8 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     MatProgressSpinnerModule,
     MatButtonModule,
     AuthSignInModule,
-    HttpClientModule
-
+    HttpClientModule,
+    IconsModule
   ],
   providers: [
     AuthGuard,
