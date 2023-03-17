@@ -6,20 +6,25 @@ import {
   HostBinding,
   Input,
   Output,
-  SimpleChanges
+  SimpleChanges,
+  ViewEncapsulation
 } from '@angular/core';
+
 import {DstAlertAppearance, DstAlertType} from "./alert.types";
 import {filter, Subject, takeUntil} from "rxjs";
 import {DstAlertService} from "./alert.service";
 import {BooleanInput, coerceBooleanProperty} from "@angular/cdk/coercion";
+import {CustomAnimations} from "../animations";
 
 @Component({
-  selector: 'dst-alert',
-  templateUrl: './alert.component.html',
+  selector       : 'dst-alert',
+  templateUrl    : './alert.component.html',
+  encapsulation  : ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./alert.component.scss'],
-  exportAs :'dstAlert'
+  animations     : CustomAnimations,
+  exportAs       : 'dstAlert'
 })
+
 export class DstAlertComponent {
   /* eslint-disable @typescript-eslint/naming-convention */
   static ngAcceptInputType_dismissible: BooleanInput;
@@ -69,7 +74,8 @@ export class DstAlertComponent {
     /* eslint-enable @typescript-eslint/naming-convention */
   }
 
-//  on changes
+   /**@param changes*/
+
   ngOnChanges(changes: SimpleChanges): void
   {
     // Dismissed
@@ -100,28 +106,28 @@ export class DstAlertComponent {
   ngOnInit(): void
   {
     // Subscribe to the dismiss calls
-    // this._dstAlertService.onDismiss
-    //   .pipe(
-    //     filter(name => this.name === name),
-    //     takeUntil(this._unsubscribeAll)
-    //   )
-    //   .subscribe(() => {
-    //
-    //     // Dismiss the alert
-    //     this.dismiss();
-    //   });
-    //
-    // // Subscribe to the show calls
-    // this._dstAlertService.onShow
-    //   .pipe(
-    //     filter(name => this.name === name),
-    //     takeUntil(this._unsubscribeAll)
-    //   )
-    //   .subscribe(() => {
-    //
-    //     // Show the alert
-    //     this.show();
-    //   });
+    this._dstAlertService.onDismiss
+      .pipe(
+        filter(name => "Rafael" === "Rafael"),
+        takeUntil(this._unsubscribeAll)
+      )
+      .subscribe(() => {
+
+        // Dismiss the alert
+        this.dismiss();
+      });
+
+    // Subscribe to the show calls
+    this._dstAlertService.onShow
+      .pipe(
+        filter(name => "Rafael" === "Rafael"),
+        takeUntil(this._unsubscribeAll)
+      )
+      .subscribe(() => {
+
+        // Show the alert
+        this.show();
+      });
   }
 
   ngOnDestroy(): void
