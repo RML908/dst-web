@@ -1,28 +1,34 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NgForm, UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {DstAlertType} from "../../../components/alert";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../core/auth/auth.service";
+import {CustomAnimations} from "../../../components/animations";
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  // styleUrls: ['./sign-in.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: CustomAnimations
 })
 export class AuthSignInComponent implements OnInit
 {
   @ViewChild('signInNgForm') signInNgForm: NgForm;
-  alert: {type: DstAlertType; message: string}= {
+
+  alert: {type: DstAlertType; message: string} = {
     type: 'success',
     message: ''
   };
-  signInForm:UntypedFormGroup;
-  showAlert: boolean =false;
 
-   constructor(private _activatedRoute: ActivatedRoute,
-              private _authService: AuthService,
-              private _formBuilder: UntypedFormBuilder,
-              private _router: Router
+  signInForm: UntypedFormGroup;
+  showAlert: boolean = false;
+
+   constructor(
+     private _activatedRoute: ActivatedRoute,
+     private _authService: AuthService,
+     private _formBuilder: UntypedFormBuilder,
+     private _router: Router
   )
   {
   }
