@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CustomAnimationCurves, CustomAnimationDurations } from '../animations/defaults';
+import { DstAnimationCurves, DstAnimationDurations } from '../animations/defaults';
 
 // -----------------------------------------------------------------------------------------------------
 // @ Zoom in
@@ -26,11 +26,11 @@ const zoomIn = trigger('zoomIn',
 
     // Transition
     transition('void => *', animate('{{timings}}'),
-      // {
-      //   params: {
-      //     timings: `${CustomAnimationDurations.entering} ${CustomAnimationCurves.deceleration}`
-      //   }
-      // }
+      {
+        params: {
+          timings: `${DstAnimationDurations.entering} ${DstAnimationCurves.deceleration}`
+        }
+      }
     )
   ]
 );
@@ -62,7 +62,7 @@ const zoomOut = trigger('zoomOut',
     transition('* => void', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.exiting} ${CustomAnimationCurves.acceleration}`
+          timings: `${DstAnimationDurations.exiting} ${DstAnimationCurves.acceleration}`
         }
       }
     )

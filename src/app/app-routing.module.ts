@@ -1,15 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {AuthSignInComponent} from "./modules/auth/sign-in/sign-in.component";
+import {NoAuthGuard} from "./core/auth/guards/noAuth.guard";
+import {LayoutComponent} from "./layout/layout.component";
 
-export const routes: Routes = [
 
-  {path: ' ', pathMatch : 'full', redirectTo: 'sign-in'  },
+
+// @formatter:off
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
+export const appRoutes: Routes = [
+
+  {path: '', pathMatch : 'full', redirectTo: 'example'  },
+  // Redirect signed-in user to the '/example'
+  //
+  // After the user signs in, the sign-in page will redirect the user to the 'signed-in-redirect'
+  // path. Below is another redirection for that path to redirect the user to the desired
+  // location. This is a small convenience to keep all main routes together here on this file.
+  {path: 'sign-in-redirect', pathMatch : 'full', redirectTo: 'example'  },
   {
     path: '',
-    // canActivate: [NoAuthGuard],
-    // canActivateChild: [],
-    component: AuthSignInComponent,
+    canMatch:[NoAuthGuard],
+    component: LayoutComponent,
     data: {
       layout: 'empty'
     },
@@ -25,8 +38,3 @@ export const routes: Routes = [
 
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }

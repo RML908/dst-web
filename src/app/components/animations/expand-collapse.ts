@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CustomAnimationCurves, CustomAnimationDurations } from '../animations/defaults';
+import { DstAnimationCurves, DstAnimationDurations } from '../animations/defaults';
 
 // -----------------------------------------------------------------------------------------------------
 // @ Expand / collapse
@@ -24,7 +24,7 @@ const expandCollapse = trigger('expandCollapse',
       animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.entering} ${CustomAnimationCurves.deceleration}`
+          timings: `${DstAnimationDurations.entering} ${DstAnimationCurves.deceleration}`
         }
       }
     )

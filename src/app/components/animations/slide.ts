@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CustomAnimationCurves, CustomAnimationDurations } from '../animations/defaults';
+import { DstAnimationCurves, DstAnimationDurations } from '../animations/defaults';
 
 // -----------------------------------------------------------------------------------------------------
 // @ Slide in top
@@ -25,7 +25,7 @@ const slideInTop = trigger('slideInTop',
     transition('void => *', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.entering} ${CustomAnimationCurves.deceleration}`
+          timings: `${DstAnimationDurations.entering} ${DstAnimationCurves.deceleration}`
         }
       }
     )
@@ -56,7 +56,7 @@ const slideInBottom = trigger('slideInBottom',
     transition('void => *', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.entering} ${CustomAnimationCurves.deceleration}`
+          timings: `${DstAnimationDurations.entering} ${DstAnimationCurves.deceleration}`
         }
       }
     )
@@ -87,7 +87,7 @@ const slideInLeft = trigger('slideInLeft',
     transition('void => *', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.entering} ${CustomAnimationCurves.deceleration}`
+          timings: `${DstAnimationDurations.entering} ${DstAnimationCurves.deceleration}`
         }
       }
     )
@@ -118,7 +118,7 @@ const slideInRight = trigger('slideInRight',
     transition('void => *', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.entering} ${CustomAnimationCurves.deceleration}`
+          timings: `${DstAnimationDurations.entering} ${DstAnimationCurves.deceleration}`
         }
       }
     )
@@ -149,7 +149,7 @@ const slideOutTop = trigger('slideOutTop',
     transition('* => void', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.exiting} ${CustomAnimationCurves.acceleration}`
+          timings: `${DstAnimationDurations.exiting} ${DstAnimationCurves.acceleration}`
         }
       }
     )
@@ -180,7 +180,7 @@ const slideOutBottom = trigger('slideOutBottom',
     transition('* => void', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.exiting} ${CustomAnimationCurves.acceleration}`
+          timings: `${DstAnimationDurations.exiting} ${DstAnimationCurves.acceleration}`
         }
       }
     )
@@ -211,7 +211,7 @@ const slideOutLeft = trigger('slideOutLeft',
     transition('* => void', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.exiting} ${CustomAnimationCurves.acceleration}`
+          timings: `${DstAnimationDurations.exiting} ${DstAnimationCurves.acceleration}`
         }
       }
     )
@@ -242,7 +242,7 @@ const slideOutRight = trigger('slideOutRight',
     transition('* => void', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.exiting} ${CustomAnimationCurves.acceleration}`
+          timings: `${DstAnimationDurations.exiting} ${DstAnimationCurves.acceleration}`
         }
       }
     )
