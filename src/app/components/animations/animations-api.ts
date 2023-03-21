@@ -29,7 +29,7 @@ import { shake } from './shake';
 import { expandCollapse } from './expand-collapse';
 
 
-export const CustomAnimations = [
+export const DstAnimations = [
   expandCollapse,
   fadeIn, fadeInTop, fadeInBottom, fadeInLeft, fadeInRight,
   fadeOut, fadeOutTop, fadeOutBottom, fadeOutLeft, fadeOutRight,

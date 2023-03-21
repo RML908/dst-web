@@ -1,17 +1,17 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NgForm, UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-import {DstAlertType} from "../../../components/alert";
+import {DstAlertType} from "../../../../@dst/compnents/alert";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../core/auth/auth.service";
-import {CustomAnimations} from "../../../components/animations";
+import {DstAnimations} from "../../../components/animations";
 
 @Component({
-  selector: 'app-sign-in',
+  selector: 'auth-sign-in',
   templateUrl: './sign-in.component.html',
-  // styleUrls: ['./sign-in.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  animations: CustomAnimations
+  animations: DstAnimations
 })
+
 export class AuthSignInComponent implements OnInit
 {
   @ViewChild('signInNgForm') signInNgForm: NgForm;
@@ -37,8 +37,8 @@ export class AuthSignInComponent implements OnInit
    ngOnInit(){
      // Create the form
      this.signInForm = this._formBuilder.group({
-       email     : ['rafael@dst.am', [Validators.required, Validators.email]],
-       password  : ['admin', Validators.required],
+       login     : ['DOC3', [Validators.required, Validators.minLength(3)]],
+       password  : ['DOC3', Validators.required],
        rememberMe: ['']
      });
   }
@@ -82,7 +82,7 @@ export class AuthSignInComponent implements OnInit
           // Set the alert
           this.alert = {
             type   : 'error',
-            message: 'Wrong email or password'
+            message: 'Անվավեր Մուտքանուն և/կամ  գաղտնաբառ'
           };
 
           // Show the alert

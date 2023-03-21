@@ -1,33 +1,67 @@
-const path = require("path");
-const generatePalette = require(path.resolve(__dirname, ('src/app/utilities/tailwind/utils/generate-palette')));
-const colors = require("tailwindcss/colors");
+const path = require('path');
+const colors = require('tailwindcss/colors');
 const defaultTheme = require('tailwindcss/defaultTheme');
+const generatePalette = require(path.resolve(__dirname, ('src/@dst/tailwind/utils/generate-palette')));
 
-const customPalettes = {
+/**
+ * dst palettes
+ *
+ * Uses the generatePalette helper method to generate
+ * Tailwind-like color palettes automatically
+ */
+const dstPalettes = {
   brand: generatePalette('#2196F3')
 };
 
+/**
+ * Themes
+ */
 const themes = {
-  // Default theme is required for theming system to work correctly
+  // Default theme is required for theming system to work correctly!
   'default': {
-    primary: {
+    primary  : {
       ...colors.indigo,
       DEFAULT: colors.indigo[600]
     },
-    accent: {
+    accent   : {
       ...colors.slate,
       DEFAULT: colors.slate[800]
     },
-    warn: {
+    warn     : {
       ...colors.red,
       DEFAULT: colors.red[600]
     },
     'on-warn': {
       500: colors.red['50']
     }
+  },
+  // Rest of the themes will use the 'default' as the base
+  // theme and will extend it with their given configuration.
+  'brand' : {
+  },
+  'teal'  : {
+    primary: {
+      ...colors.teal,
+      DEFAULT: colors.teal[600]
+    }
+  },
+  'rose'  : {
+    primary: colors.rose
+  },
+  'purple': {
+    primary: {
+      ...colors.purple,
+      DEFAULT: colors.purple[600]
+    }
+  },
+  'amber' : {
+    primary: colors.amber
   }
-}
+};
 
+/**
+ * Tailwind configuration
+ */
 const config = {
   darkMode   : 'class',
   content    : ['./src/**/*.{html,scss,ts}'],
@@ -157,61 +191,61 @@ const config = {
       typography: ({theme}) => ({
         DEFAULT: {
           css: {
-            color              : 'var(--custom-text-default)',
+            color              : 'var(--dst-text-default)',
             '[class~="lead"]'  : {
-              color: 'var(--custom-text-secondary)'
+              color: 'var(--dst-text-secondary)'
             },
             a                  : {
-              color: 'var(--custom-primary-500)'
+              color: 'var(--dst-primary-500)'
             },
             strong             : {
-              color: 'var(--custom-text-default)'
+              color: 'var(--dst-text-default)'
             },
             'ol > li::before'  : {
-              color: 'var(--custom-text-secondary)'
+              color: 'var(--dst-text-secondary)'
             },
             'ul > li::before'  : {
-              backgroundColor: 'var(--custom-text-hint)'
+              backgroundColor: 'var(--dst-text-hint)'
             },
             hr                 : {
-              borderColor: 'var(--custom-border)'
+              borderColor: 'var(--dst-border)'
             },
             blockquote         : {
-              color          : 'var(--custom-text-default)',
-              borderLeftColor: 'var(--custom-border)'
+              color          : 'var(--dst-text-default)',
+              borderLeftColor: 'var(--dst-border)'
             },
             h1                 : {
-              color: 'var(--custom-text-default)'
+              color: 'var(--dst-text-default)'
             },
             h2                 : {
-              color: 'var(--custom-text-default)'
+              color: 'var(--dst-text-default)'
             },
             h3                 : {
-              color: 'var(--custom-text-default)'
+              color: 'var(--dst-text-default)'
             },
             h4                 : {
-              color: 'var(--custom-text-default)'
+              color: 'var(--dst-text-default)'
             },
             'figure figcaption': {
-              color: 'var(--custom-text-secondary)'
+              color: 'var(--dst-text-secondary)'
             },
             code               : {
-              color     : 'var(--custom-text-default)',
+              color     : 'var(--dst-text-default)',
               fontWeight: '500'
             },
             'a code'           : {
-              color: 'var(--custom-primary)'
+              color: 'var(--dst-primary)'
             },
             pre                : {
               color          : theme('colors.white'),
               backgroundColor: theme('colors.gray.800')
             },
             thead              : {
-              color            : 'var(--custom-text-default)',
-              borderBottomColor: 'var(--custom-border)'
+              color            : 'var(--dst-text-default)',
+              borderBottomColor: 'var(--dst-border)'
             },
             'tbody tr'         : {
-              borderBottomColor: 'var(--custom-border)'
+              borderBottomColor: 'var(--dst-border)'
             },
             'ol[type="A" s]'   : false,
             'ol[type="a" s]'   : false,
@@ -235,6 +269,7 @@ const config = {
       })
     }
   },
+
   corePlugins: {
     appearance        : false,
     container         : false,
@@ -246,22 +281,15 @@ const config = {
   },
   plugins    : [
 
-    // custom - Tailwind plugins
-    require(path.resolve(__dirname, ('src/app/utilities/tailwind/plugins/utilities'))),
-    require(path.resolve(__dirname, ('src/app/utilities/tailwind/plugins/icon-size'))),
+    // dst - Tailwind plugins
+    require(path.resolve(__dirname, ('src/@dst/tailwind/plugins/utilities'))),
+    require(path.resolve(__dirname, ('src/@dst/tailwind/plugins/icon-size'))),
+    require(path.resolve(__dirname, ('src/@dst/tailwind/plugins/theming')))({themes}),
 
-    // Other third party and/or custom plugins
+    // Other third party and/or dst plugins
     require('@tailwindcss/typography')({modifiers: ['sm', 'lg']}),
     require('@tailwindcss/line-clamp')
   ]
 };
 
 module.exports = config;
-
-// module.exports = {
-//   content: [],
-//   theme: {
-//     extend: {},
-//   },
-//   plugins: [],
-// }

@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CustomAnimationCurves, CustomAnimationDurations } from '../animations/defaults';
+import { DstAnimationCurves, DstAnimationDurations } from '../animations/defaults';
 
 // -----------------------------------------------------------------------------------------------------
 // @ Fade in
@@ -25,7 +25,7 @@ const fadeIn = trigger('fadeIn',
     transition('void => *', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.entering} ${CustomAnimationCurves.deceleration}`
+          timings: `${DstAnimationDurations.entering} ${DstAnimationCurves.deceleration}`
         }
       }
     )
@@ -58,7 +58,7 @@ const fadeInTop = trigger('fadeInTop',
     transition('void => *', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.entering} ${CustomAnimationCurves.deceleration}`
+          timings: `${DstAnimationDurations.entering} ${DstAnimationCurves.deceleration}`
         }
       }
     )
@@ -91,7 +91,7 @@ const fadeInBottom = trigger('fadeInBottom',
     transition('void => *', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.entering} ${CustomAnimationCurves.deceleration}`
+          timings: `${DstAnimationDurations.entering} ${DstAnimationCurves.deceleration}`
         }
       }
     )
@@ -124,7 +124,7 @@ const fadeInLeft = trigger('fadeInLeft',
     transition('void => *', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.entering} ${CustomAnimationCurves.deceleration}`
+          timings: `${DstAnimationDurations.entering} ${DstAnimationCurves.deceleration}`
         }
       }
     )
@@ -157,7 +157,7 @@ const fadeInRight = trigger('fadeInRight',
     transition('void => *', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.entering} ${CustomAnimationCurves.deceleration}`
+          timings: `${DstAnimationDurations.entering} ${DstAnimationCurves.deceleration}`
         }
       }
     )
@@ -188,7 +188,7 @@ const fadeOut = trigger('fadeOut',
     transition('* => void', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.exiting} ${CustomAnimationCurves.acceleration}`
+          timings: `${DstAnimationDurations.exiting} ${DstAnimationCurves.acceleration}`
         }
       }
     )
@@ -221,7 +221,7 @@ const fadeOutTop = trigger('fadeOutTop',
     transition('* => void', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.exiting} ${CustomAnimationCurves.acceleration}`
+          timings: `${DstAnimationDurations.exiting} ${DstAnimationCurves.acceleration}`
         }
       }
     )
@@ -254,7 +254,7 @@ const fadeOutBottom = trigger('fadeOutBottom',
     transition('* => void', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.exiting} ${CustomAnimationCurves.acceleration}`
+          timings: `${DstAnimationDurations.exiting} ${DstAnimationCurves.acceleration}`
         }
       }
     )
@@ -287,7 +287,7 @@ const fadeOutLeft = trigger('fadeOutLeft',
     transition('* => void', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.exiting} ${CustomAnimationCurves.acceleration}`
+          timings: `${DstAnimationDurations.exiting} ${DstAnimationCurves.acceleration}`
         }
       }
     )
@@ -320,7 +320,7 @@ const fadeOutRight = trigger('fadeOutRight',
     transition('* => void', animate('{{timings}}'),
       {
         params: {
-          timings: `${CustomAnimationDurations.exiting} ${CustomAnimationCurves.acceleration}`
+          timings: `${DstAnimationDurations.exiting} ${DstAnimationCurves.acceleration}`
         }
       }
     )

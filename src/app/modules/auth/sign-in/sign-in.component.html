@@ -10,9 +10,8 @@
       <!-- Title -->
       <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">ՄՈՒՏՔ ՀԱՄԱԿԱՐԳ</div>
 
-      <!-- Alert -->
       <dst-alert
-        class="mt-8 -mb-4"
+        class="mt-8"
         *ngIf="showAlert"
         [appearance]="'outline'"
         [showIcon]="false"
@@ -29,15 +28,15 @@
 
         <!-- Email field -->
         <mat-form-field class="w-full">
-          <mat-label>Էլեկտրոնային հասցե</mat-label>
+          <mat-label>Մոտքանուն</mat-label>
           <input
             id="email"
             matInput
-            [formControlName]="'email'">
-          <mat-error *ngIf="signInForm.get('email').hasError('required')">
-            Էլ.հասցեն անհրաժեշտ է
+            [formControlName]="'login'">
+          <mat-error *ngIf="signInForm.get('login').hasError('required')">
+            մուտքանունն  անհրաժեշտ է
           </mat-error>
-          <mat-error *ngIf="signInForm.get('email').hasError('email')">
+          <mat-error *ngIf="signInForm.get('login').hasError('login')">
             Խնդրում եմ մուտքագրել գործող էլ.հասցե
           </mat-error>
         </mat-form-field>
@@ -73,9 +72,9 @@
         <!-- Actions -->
         <div class="inline-flex items-end justify-between w-full mt-1.5">
           <mat-checkbox
-            [color]="'primary'"
+            [color]="'accent'"
             [formControlName]="'rememberMe'">
-            հիշել ինձ
+            հիշել
           </mat-checkbox>
           <a
             class="text-md font-medium text-primary-500 hover:underline whitespace-nowrap"
@@ -85,9 +84,9 @@
 
         <!-- Submit button -->
         <button
-          class="custom-mat-button-large w-full mt-6"
+          class="dst-mat-button-large w-full mt-6"
           mat-flat-button
-          [color]="'primary'"
+          [color]="'warn'"
           [disabled]="signInForm.disabled"
           (click)="signIn()">
                     <span *ngIf="!signInForm.disabled">
