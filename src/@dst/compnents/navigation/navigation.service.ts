@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DstNavigationItem } from '../navigation/navigation.types';
+import { DstNavigationItem } from './navigation.types';
 
 @Injectable({
     providedIn: 'root'

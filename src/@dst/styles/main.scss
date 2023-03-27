@@ -1,6 +1,8 @@
 //Components
 @use 'components/input';
+@use 'components/example-viewer';
 
 //Overrides
+@use 'overrides/perfect-scrollbar';
 @use 'overrides/angular-material';
 @use 'overrides/highlightjs';

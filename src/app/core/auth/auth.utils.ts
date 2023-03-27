@@ -51,8 +51,7 @@ export class AuthUtils
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Base64 decoder
-     * Credits: https://github.com/atk
+
      *
      * @param str
      * @private

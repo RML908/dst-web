@@ -12,6 +12,7 @@ import {MatInputModule} from "@angular/material/input";
 import {AuthSignInComponent} from "./sign-in.component";
 import {DstAlertModule} from "../../../../@dst/compnents/alert";
 import {SharedModule} from "../../../shared/shared.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {SharedModule} from "../../../shared/shared.module";
   ],
     imports: [
         RouterModule.forChild(authSignInRoutes),
+        HttpClientModule,
         MatButtonModule,
         MatCheckboxModule,
         MatFormFieldModule,

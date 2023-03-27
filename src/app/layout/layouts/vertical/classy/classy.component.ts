@@ -50,7 +50,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
 
-    /**
+    /*
      * On init
      */
     ngOnInit(): void
@@ -66,7 +66,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
         this._userService.user$
             .pipe((takeUntil(this._unsubscribeAll)))
             .subscribe((user: User) => {
-                this.user = user;
+              this.user = user;
             });
 
         // Subscribe to media changes

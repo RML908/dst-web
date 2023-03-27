@@ -11,11 +11,15 @@ import {DstConfigModule} from "../@dst/services/config";
 import {appConfig} from "./core/config/app.config";
 import {CoreModule} from "./core/core.module";
 import {LayoutModule} from "./layout/layout.module";
+import {HttpClientModule} from "@angular/common/http";
+import {mockApiServices} from "./mock-api";
+import {DstMockApiModule} from "../@dst/lib/mock-api";
 
 const routerConfig: ExtraOptions = {
   preloadingStrategy       : PreloadAllModules,
   scrollPositionRestoration: 'enabled'
 };
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +28,7 @@ const routerConfig: ExtraOptions = {
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, routerConfig),
+    DstMockApiModule.forRoot(mockApiServices),
     DstConfigModule.forRoot(appConfig),
     DstModule,
     CoreModule,

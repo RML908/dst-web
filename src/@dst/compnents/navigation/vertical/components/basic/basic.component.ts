@@ -14,7 +14,7 @@ import {DstUtilsService} from "../../../../../services/utils";
 })
 export class DstVerticalNavigationBasicItemComponent implements OnInit, OnDestroy
 {
-    @Input() item: DstNavigationItem;
+    @Input()  item: DstNavigationItem;
     @Input() name: string;
 
     isActiveMatchOptions: IsActiveMatchOptions;

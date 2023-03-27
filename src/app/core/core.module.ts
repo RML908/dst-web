@@ -7,13 +7,13 @@ import {IconsModule} from "./icons/icons.module";
 @NgModule({
   declarations: [],
   imports: [
-    AuthModule,
     IconsModule
   ]
 })
 export class CoreModule {
+
   constructor(
-  @Optional() @SkipSelf() parentModule?:CoreModule
+      @Optional() @SkipSelf() parentModule?:CoreModule
   )
   {
     if( parentModule)

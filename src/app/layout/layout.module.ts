@@ -23,7 +23,7 @@ const layoutModules = [
     CenteredLayoutModule,
     EnterpriseLayoutModule,
     MaterialLayoutModule,
-    // ModernLayoutModule,
+    ModernLayoutModule,
 
     // Vertical navigation
     ClassicLayoutModule,
@@ -38,11 +38,11 @@ const layoutModules = [
     declarations: [
         LayoutComponent
     ],
-    imports     : [
+    imports: [
         SharedModule,
         SettingsModule,
         ...layoutModules,
-        AuthSignInModule
+        AuthSignInModule,
     ],
     exports     : [
         LayoutComponent,

@@ -1,9 +1,18 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation
+  } from '@angular/core';
 import { Router } from '@angular/router';
 import { BooleanInput } from '@angular/cdk/coercion';
 import { Subject, takeUntil } from 'rxjs';
 import { User } from 'app/core/user/user.types';
 import { UserService } from 'app/core/user/user.service';
+import {AuthService} from "../../../core/auth/auth.service";
 
 @Component({
     selector       : 'user',
@@ -12,7 +21,9 @@ import { UserService } from 'app/core/user/user.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
     exportAs       : 'user'
 })
+
 export class UserComponent implements OnInit, OnDestroy
+
 {
     /* eslint-disable @typescript-eslint/naming-convention */
     static ngAcceptInputType_showAvatar: BooleanInput;
@@ -29,7 +40,8 @@ export class UserComponent implements OnInit, OnDestroy
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _router: Router,
-        private _userService: UserService
+        private _userService: UserService,
+        private _authService: AuthService
     )
     {
     }
@@ -43,15 +55,17 @@ export class UserComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        // Subscribe to user changes
-        this._userService.user$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((user: User) => {
-                this.user = user;
+        this._userService.getUserData().subscribe((user: User) => {
+        this._authService.setUser(user);
+      });
 
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
+
+        // Subscribe to user changes
+      this._authService.user$.pipe(takeUntil(this._unsubscribeAll))
+        .subscribe((user: any) => {
+          this.user = user;
+          this._changeDetectorRef.markForCheck();
+        });
     }
 
     /**
@@ -93,6 +107,6 @@ export class UserComponent implements OnInit, OnDestroy
      */
     signOut(): void
     {
-        this._router.navigate(['/sign-out']);
+        this._authService.logout();
     }
 }

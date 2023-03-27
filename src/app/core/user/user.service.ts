@@ -1,70 +1,68 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map, Observable, ReplaySubject, tap } from 'rxjs';
-import { User } from 'app/core/user/user.types';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, map, Observable} from 'rxjs';
+import {User} from 'app/core/user/user.types';
+import {AuthService} from "../auth/auth.service";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-export class UserService
-{
-    private _user: ReplaySubject<User> = new ReplaySubject<User>(1);
+export class UserService {
+  private _userSubject: BehaviorSubject<User | null> = new BehaviorSubject(null);
 
-    /**
-     * Constructor
-     */
-    constructor(private _httpClient: HttpClient)
-    {
-    }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Accessors
-    // -----------------------------------------------------------------------------------------------------
+  /**
+   * Constructor
+   */
+  constructor(
+    private _httpClient: HttpClient,
+    private _authService: AuthService
+  ) {
+    this._authService.user$.subscribe(user => {
+      this._userSubject.next(user);
+    });
 
-    /**
-     * Setter & getter for user
-     *
-     * @param value
-     */
-    set user(value: User)
-    {
-        // Store the value
-        this._user.next(value);
-    }
+  }
 
-    get user$(): Observable<User>
-    {
-        return this._user.asObservable();
-    }
+  // -----------------------------------------------------------------------------------------------------
+  // @ Accessors
+  // -----------------------------------------------------------------------------------------------------
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
+  /**
+   * Setter & getter for user
+   *
+   * @param value
+   */
 
-    /**
-     * Get the current logged in user data
-     */
-    get(): Observable<User>
-    {
-        return this._httpClient.get<User>('dstMobile.am/dsthealth_api/api/login.php').pipe(
-            tap((user) => {
-              console.log(user);
-              this._user.next(user);
-            })
-        );
-    }
+  getUserData(): Observable<User | null> {
+    const userJson = localStorage.getItem('user');
+    const user = userJson ? JSON.parse(userJson) : null;
+    this._userSubject.next(user);
+    return this._userSubject.asObservable();
+  }
 
-    /**
-     * Update the user
-     *
-     * @param user
-     */
-    update(user: User): Observable<any>
-    {
-        return this._httpClient.patch<User>('api/common/user', {user}).pipe(
-            map((response) => {
-                this._user.next(response);
-            })
-        );
-    }
+
+  // -----------------------------------------------------------------------------------------------------
+  // @ Public methods
+  // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * Get the current logged in user data
+   */
+  get user$(): Observable<User> {
+    return this._userSubject.asObservable();
+  }
+
+  /**
+   * Update the user
+   *
+   * @param user
+   */
+  update(user: User): Observable<any> {
+    return this._httpClient.patch<User>('api/common/user', {user}).pipe(
+      map((response) => {
+        this._userSubject.next(response);
+      })
+    );
+  }
 }

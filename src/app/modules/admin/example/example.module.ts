@@ -13,7 +13,7 @@ const exampleRoutes: Route[] = [
     declarations: [
         ExampleComponent
     ],
-    imports     : [
+    imports : [
         RouterModule.forChild(exampleRoutes)
     ]
 })

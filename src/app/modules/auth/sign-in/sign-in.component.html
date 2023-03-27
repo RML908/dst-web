@@ -30,13 +30,14 @@
         <mat-form-field class="w-full">
           <mat-label>Մոտքանուն</mat-label>
           <input
-            id="email"
+            id="userLogin"
+            type="text"
             matInput
-            [formControlName]="'login'">
-          <mat-error *ngIf="signInForm.get('login').hasError('required')">
+            [formControlName]="'user_login'">
+          <mat-error *ngIf="signInForm.get('user_login').hasError('required')">
             մուտքանունն  անհրաժեշտ է
           </mat-error>
-          <mat-error *ngIf="signInForm.get('login').hasError('login')">
+          <mat-error *ngIf="signInForm.get('user_login').hasError('user_login')">
             Խնդրում եմ մուտքագրել գործող էլ.հասցե
           </mat-error>
         </mat-form-field>
@@ -45,10 +46,10 @@
         <mat-form-field class="w-full">
           <mat-label>Գաղտնաբառ</mat-label>
           <input
-            id="password"
+            id="userPassword"
             matInput
             type="password"
-            [formControlName]="'password'"
+            [formControlName]="'user_password'"
             #passwordField>
           <button
             mat-icon-button
@@ -71,11 +72,11 @@
 
         <!-- Actions -->
         <div class="inline-flex items-end justify-between w-full mt-1.5">
-          <mat-checkbox
-            [color]="'accent'"
-            [formControlName]="'rememberMe'">
-            հիշել
-          </mat-checkbox>
+<!--          <mat-checkbox-->
+<!--            [color]="'accent'"-->
+<!--            [formControlName]="'rememberMe'">-->
+<!--            հիշել-->
+<!--          </mat-checkbox>-->
           <a
             class="text-md font-medium text-primary-500 hover:underline whitespace-nowrap"
             [routerLink]="['/forgot-password']">Մոռացե՞լ էք գաղտնաբառը?

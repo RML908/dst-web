@@ -86,7 +86,8 @@ export class SettingsComponent implements OnInit, OnDestroy
      */
     setLayout(layout: string): void
     {
-        // Clear the 'layout' query param to allow layout changes
+      console.log(layout);
+      // Clear the 'layout' query param to allow layout changes
         this._router.navigate([], {
             queryParams        : {
                 layout: null
