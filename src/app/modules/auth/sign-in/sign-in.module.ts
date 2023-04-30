@@ -10,8 +10,11 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatInputModule} from "@angular/material/input";
 import {AuthSignInComponent} from "./sign-in.component";
-import {ReactiveFormsModule} from "@angular/forms";
-import {DstAlertModule} from "../../../components/alert";
+import {DstAlertModule} from "../../../../@dst/compnents/alert";
+import {SharedModule} from "../../../shared/shared.module";
+import {HttpClientModule} from "@angular/common/http";
+import {AuthModule} from "../../../core/auth/auth.module";
+import {DstCardModule} from "../../../../@dst/compnents/card";
 
 @NgModule({
   declarations: [
@@ -25,9 +28,9 @@ import {DstAlertModule} from "../../../components/alert";
         MatIconModule,
         MatInputModule,
         MatProgressSpinnerModule,
-        ReactiveFormsModule,
+        DstCardModule,
         DstAlertModule,
-        CommonModule,
+        SharedModule,
     ]
 })
 export class AuthSignInModule { }

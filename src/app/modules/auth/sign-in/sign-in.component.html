@@ -3,16 +3,15 @@
     <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
       <!-- Logo -->
       <div class="w-12 logo-text">
-        <img src="../../../../assets/pictures/logo/logo.svg" alt="logo">
+        <img src="../../../../assets/pictures/logo/logo.png" alt="logo">
         <span class="font-medium">DST </span>
       </div>
 
       <!-- Title -->
-      <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">Մուտք համակարգ</div>
+      <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">ՄՈՒՏՔ ՀԱՄԱԿԱՐԳ</div>
 
-      <!-- Alert -->
       <dst-alert
-        class="mt-8 -mb-4"
+        class="mt-8"
         *ngIf="showAlert"
         [appearance]="'outline'"
         [showIcon]="false"
@@ -29,15 +28,16 @@
 
         <!-- Email field -->
         <mat-form-field class="w-full">
-          <mat-label>Էլեկտրոնային հասցե</mat-label>
+          <mat-label>Մոտքանուն</mat-label>
           <input
-            id="email"
+            id="userLogin"
+            type="text"
             matInput
-            [formControlName]="'email'">
-          <mat-error *ngIf="signInForm.get('email').hasError('required')">
-            Էլ.հասցեն անհրաժեշտ է
+            [formControlName]="'user_login'">
+          <mat-error *ngIf="signInForm.get('user_login').hasError('required')">
+            մուտքանունն  անհրաժեշտ է
           </mat-error>
-          <mat-error *ngIf="signInForm.get('email').hasError('email')">
+          <mat-error *ngIf="signInForm.get('user_login').hasError('user_login')">
             Խնդրում եմ մուտքագրել գործող էլ.հասցե
           </mat-error>
         </mat-form-field>
@@ -46,10 +46,10 @@
         <mat-form-field class="w-full">
           <mat-label>Գաղտնաբառ</mat-label>
           <input
-            id="password"
+            id="userPassword"
             matInput
             type="password"
-            [formControlName]="'password'"
+            [formControlName]="'user_password'"
             #passwordField>
           <button
             mat-icon-button
@@ -72,11 +72,11 @@
 
         <!-- Actions -->
         <div class="inline-flex items-end justify-between w-full mt-1.5">
-          <mat-checkbox
-            [color]="'primary'"
-            [formControlName]="'rememberMe'">
-            հիշել ինձ
-          </mat-checkbox>
+<!--          <mat-checkbox-->
+<!--            [color]="'accent'"-->
+<!--            [formControlName]="'rememberMe'">-->
+<!--            հիշել-->
+<!--          </mat-checkbox>-->
           <a
             class="text-md font-medium text-primary-500 hover:underline whitespace-nowrap"
             [routerLink]="['/forgot-password']">Մոռացե՞լ էք գաղտնաբառը?
@@ -85,9 +85,9 @@
 
         <!-- Submit button -->
         <button
-          class="custom-mat-button-large w-full mt-6"
+          class="dst-mat-button-large w-full mt-6"
           mat-flat-button
-          [color]="'primary'"
+          [color]="'warn'"
           [disabled]="signInForm.disabled"
           (click)="signIn()">
                     <span *ngIf="!signInForm.disabled">
