@@ -1,112 +1,132 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of, tap} from "rxjs";
-import {Router} from "@angular/router";
+import {BehaviorSubject, catchError, map, Observable, of, take, tap, throwError} from "rxjs";
+import {Router, UrlTree} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../../modules/auth/model/user";
 import {environment} from "../../../environments/environment";
 import {CookieService} from "ngx-cookie-service";
 import _ from 'lodash';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class AuthService {
-  private _userSubject: BehaviorSubject<User | null> = new BehaviorSubject(null);
-  public user: Observable<User | null>;
-  private _authenticated: boolean = false;
-  private loggedIn = new BehaviorSubject<boolean>(false);
-  isAuthenticated: any;
+
+  private _userSubject = new BehaviorSubject<User | null>(null);
+  public user$ = this._userSubject.asObservable();
+  public authenticated: boolean = false;
+  private authenticatedSubject = new BehaviorSubject<boolean>(this.authenticated);
+  public authenticated$ = this.authenticatedSubject.asObservable();
+  private sessionID: string;
+  private user: User;
+  private signInRedirectUrl: string;
+
 
   constructor(
     private router: Router,
     private http: HttpClient,
     private cookieService: CookieService
-  ) {
-    const userJson = localStorage.getItem('user');
-    if (userJson) {
-      const user = JSON.parse(userJson) as User;
-      this._userSubject.next(user);
-    }
+  ) {}
+
+   set userInLocalStorageSet(user: any) {
+    localStorage.setItem('user', user);
   }
-
-  get user$(): Observable<User | null> {
-    return this._userSubject.asObservable();
+   userInLocalStorage(): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return of(user);
   }
+  // get userInLocalStorage(): any {
+  //   return  localStorage.getItem('user')?? '';
+  // }
 
-
-  setUser(user: User): void {
-    if (!_.isEqual(user, this._userSubject.getValue())) {
-      this._userSubject.next(user);
-      localStorage.setItem('user', JSON.stringify(user));
-    }
-  }
-
-  clearUser(): void {
-    this._userSubject.next(null);
+  private removeUserFromLocalStorage(): void {
     localStorage.removeItem('user');
   }
 
-  signIn(username: string, password: string, redirectURL: string): Observable<User> {
-    const url = `${environment.apiUrl}/login.php?user_login=${username}&user_password=${password}`;
-    return this.http.get(url)
-      .pipe(
-        tap((data: User) => {
-          this.setUser(data);
-          const urlTree = this.router.parseUrl(redirectURL);
-          this.router.navigateByUrl(urlTree);
-        })
-      );
+  setSignInRedirect(url: string) {
+    this.signInRedirectUrl = url;
   }
 
+  getSignInRedirect() {
+    return this.signInRedirectUrl || '/';
+  }
+
+  signInRedirect(url: string): UrlTree {
+    return this.router.createUrlTree(['/sign-in'], { queryParams: { returnUrl: url } });
+  }
+   public get userValue(){
+    return this._userSubject.value
+   }
+ public isAuthenticated (): boolean {
+    return localStorage.getItem('user') !== null;
+ }
+
+  signIn(credentials:{user_login: string, user_password: string}): Observable<any> {
+    const url = `${environment.apiUrl}/login.php?user_login=${credentials.user_login}&user_password=${credentials.user_password}`;
+    return this.http.get<any>(url, { withCredentials: false }).pipe(
+      tap((data:User[]) => {
+        console.log(data);
+       const userData = data
+        // const setedUser = localStorage.setItem('user', data)
+        const setedUser = localStorage.setItem("user", JSON.stringify(userData));
+        console.log("setedUser==",setedUser);
+        this._userSubject.next(userData[0])
+        this.authenticated = true;
+      }),
+      catchError(error => {
+        // Handle login error
+        this.authenticated = false;
+        return throwError(error);
+      })
+    );
+  }
+
+
+
+   check(): Observable<boolean>{
+
+    if(this.authenticated){
+      return of(true);
+    }
+    //Check user availability
+
+    return of(false)
+   }
+
+
+  // public isAuthenticated(): Observable<boolean> {
+  //   return this.authenticated$;
+  // }
+  // signIn(username: string, password: string, redirectURL: string): Observable<any> {
+  //   const url = `${environment.apiUrl}/login.php?user_login=${username}&user_password=${password}`;
+  //   return this.http.get<any>(url, { withCredentials: false }).pipe(
+  //     tap(data => {
+  //       this.setUserInLocalStorage(data);
+  //       if(data) {
+  //         this.getUserFromLocalStorage()
+  //         this.authenticated = false;
+  //       }
+  //       const urlTree = this.router.parseUrl(redirectURL);
+  //       this.router.navigateByUrl(urlTree);
+  //     })
+  //   );
+  // }
+
   logout() {
-    this.clearUser();
+    this.removeUserFromLocalStorage();
     this._userSubject.next(null);
     this.router.navigate(['/sign-in']);
   }
 
   signOut(): Observable<any> {
-    const urlTree = this.router.parseUrl('/sign-in');
-    this.router.navigateByUrl(urlTree);
-    this.setUser(null);
-    //ToDo
-    // localStorage.removeItem('accessToken');
 
-    // Set the authenticated flag to false
-    this._authenticated = false;
+    this.removeUserFromLocalStorage();
+        this.authenticated = false;
+        this.user = null;
+        this.sessionID = null;
 
-    // Return the observable
-    return of(true);
+        return of(true)
+
   }
-
-
-  check(): Observable<boolean> {
-    // Check if the user is already authenticated
-    if (this.isAuthenticated) {
-      return of(true);
-    }
-
-    // Check if a session cookie exists
-    const sessionCookie = this.cookieService.get('session');
-    if (!sessionCookie) {
-      return of(false);
-    }
-
-    // Check if the session is valid (e.g. not expired)
-    if (!AuthService.validateSession(sessionCookie)) {
-      return of(false);
-    }
-
-    // The user is authenticated
-    return of(true);
-  }
-
-  private static validateSession(sessionCookie: string): boolean {
-    // TODO: implement session validation logic
-    console.log(sessionCookie);
-    return true;
-  }
-
 
   //ToDO
   // signInUsingToken(): Observable<any>

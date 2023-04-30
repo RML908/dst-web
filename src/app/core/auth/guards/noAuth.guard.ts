@@ -1,34 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Route, Router, UrlSegment, UrlTree } from '@angular/router';
-import { Observable, of, switchMap } from 'rxjs';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate, CanMatch,
+  Route,
+  Router,
+  RouterStateSnapshot,
+  UrlSegment,
+  UrlTree
+} from '@angular/router';
+import {Observable, of, switchMap} from 'rxjs';
 import { AuthService } from 'app/core/auth/auth.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class NoAuthGuard
-{
-    /**
-     * Constructor
-     */
-    constructor(
-        private _authService: AuthService,
-        private _router: Router
-    )
-    {
-    }
+export class NoAuthGuard {
+  /**
+   * Constructor
+   */
+  constructor(
+    private _authService: AuthService,
+    private _router: Router
+  ) {
+  }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------------
+  // @ Public methods
+  // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * Can match
-     *
-     * @param route
-     * @param segments
-     */
-    canMatch(route: Route, segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
+  /**
+   * Can match
+   *@param route
+   * @param segments
+   */
+
+  canMatch(route: Route, segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
     {
         return this._check();
     }
@@ -46,8 +52,8 @@ export class NoAuthGuard
     {
         // Check the authentication status and return an observable of
         // "true" or "false" to allow or prevent the access
-        return this._authService.check().pipe(
-            switchMap((authenticated) => of(!authenticated))
-        );
+    return this._authService.check().pipe(
+      switchMap((authenticated)=> of(!authenticated ))
+    );
     }
 }

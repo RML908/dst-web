@@ -4,11 +4,39 @@ import {DstNavigationItem} from "../../../../@dst/compnents/navigation";
 
 export const defaultNavigation: DstNavigationItem[] = [
     {
-        id   : 'example',
-        title: 'Example',
+        id   : 'addpatient',
+        title: 'Գրանցումներ',
         type : 'basic',
         icon : 'heroicons_outline:chart-pie',
-        link : '/example'
+        link : '/app/ecommerce/invertory'
+    },
+  {
+        id   : 'addpatient',
+        title: 'Բժիշկ',
+        type : 'basic',
+        icon : 'heroicons_outline:chart-pie',
+        link : '/app/ecommerce/invertory'
+    },
+  {
+        id   : 'addpatient',
+        title: 'Բուժքույր',
+        type : 'basic',
+        icon : 'heroicons_outline:chart-pie',
+        link : '/app/ecommerce/invertory'
+    },
+  {
+        id   : 'addpatient',
+        title: 'Գրանցված Պացիենտներ',
+        type : 'basic',
+        icon : 'heroicons_outline:chart-pie',
+        link : '/app/ecommerce/invertory'
+    } ,
+  {
+        id   : 'addpatient',
+        title: 'Ախտորոշիչ արդյունքներ',
+        type : 'basic',
+        icon : 'heroicons_outline:chart-pie',
+        link : '/app/ecommerce/invertory'
     }
 ];
 export const compactNavigation: DstNavigationItem[] = [
@@ -22,7 +50,7 @@ export const compactNavigation: DstNavigationItem[] = [
 ];
 export const futuristicNavigation: DstNavigationItem[] = [
     {
-        id   : 'example',
+        id   : 'addpatient',
         title: 'Example',
         type : 'basic',
         icon : 'heroicons_outline:chart-pie',

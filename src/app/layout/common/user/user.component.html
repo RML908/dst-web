@@ -5,8 +5,8 @@
     <span class="relative">
         <img
             class="w-7 h-7 rounded-full"
-            *ngIf="showAvatar && user.image"
-            [src]="user.image">
+            *ngIf="showAvatar && user"
+            [src]="user.image" />
         <mat-icon
             *ngIf="!showAvatar || !user.image"
             [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
@@ -53,7 +53,6 @@
         <span>Sign out</span>
     </button>
 </mat-menu>
-
 <!--<mat-menu-->
 <!--    class="user-status-menu"-->
 <!--    #userStatus="matMenu">-->

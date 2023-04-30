@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, map, Observable} from 'rxjs';
+import {BehaviorSubject, map, Observable, tap} from 'rxjs';
 import {User} from 'app/core/user/user.types';
 import {AuthService} from "../auth/auth.service";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,14 @@ export class UserService {
    */
   constructor(
     private _httpClient: HttpClient,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _http: HttpClient
   ) {
-    this._authService.user$.subscribe(user => {
-      this._userSubject.next(user);
+    this._authService.userInLocalStorage().subscribe(user => {
+      if(user){
+        console.log(user);
+        this._userSubject.next(user[0]);
+      }
     });
 
   }
@@ -31,12 +36,12 @@ export class UserService {
   /**
    * Setter & getter for user
    *
-   * @param value
    */
 
   getUserData(): Observable<User | null> {
     const userJson = localStorage.getItem('user');
     const user = userJson ? JSON.parse(userJson) : null;
+    console.log("userService User?",user);
     this._userSubject.next(user);
     return this._userSubject.asObservable();
   }
@@ -47,12 +52,16 @@ export class UserService {
   // -----------------------------------------------------------------------------------------------------
 
   /**
-   * Get the current logged in user data
+   * Get the current logged-in user data
    */
-  get user$(): Observable<User> {
-    return this._userSubject.asObservable();
-  }
+  // get user$(): Observable<User> {
+  //   return this._userSubject.asObservable();
+  // }
+  public setUser(user: User | null): void {
+    localStorage.setItem('user', JSON.stringify(user));
+    this._userSubject.next(user);
 
+  }
   /**
    * Update the user
    *
@@ -62,6 +71,7 @@ export class UserService {
     return this._httpClient.patch<User>('api/common/user', {user}).pipe(
       map((response) => {
         this._userSubject.next(response);
+        console.log(response);
       })
     );
   }

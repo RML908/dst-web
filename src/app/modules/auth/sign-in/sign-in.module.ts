@@ -13,23 +13,22 @@ import {AuthSignInComponent} from "./sign-in.component";
 import {DstAlertModule} from "../../../../@dst/compnents/alert";
 import {SharedModule} from "../../../shared/shared.module";
 import {HttpClientModule} from "@angular/common/http";
+import {AuthModule} from "../../../core/auth/auth.module";
+import {DstCardModule} from "../../../../@dst/compnents/card";
 
 @NgModule({
   declarations: [
     AuthSignInComponent
   ],
-  exports:[
-    AuthSignInComponent
-  ],
     imports: [
         RouterModule.forChild(authSignInRoutes),
-        HttpClientModule,
         MatButtonModule,
         MatCheckboxModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
         MatProgressSpinnerModule,
+        DstCardModule,
         DstAlertModule,
         SharedModule,
     ]

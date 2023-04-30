@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import {Subject, takeUntil, timeout} from 'rxjs';
 import {DstNavigationItem} from "../../../navigation.types";
 import {DstVerticalNavigationComponent} from "../../vertical.component";
 import {DstNavigationService} from "../../../navigation.service";
@@ -11,6 +11,7 @@ import {DstNavigationService} from "../../../navigation.service";
 })
 export class DstVerticalNavigationDividerItemComponent implements OnInit, OnDestroy
 {
+    @Input() autoCollapse: boolean;
     @Input() item: DstNavigationItem;
     @Input() name: string;
 
@@ -39,6 +40,8 @@ export class DstVerticalNavigationDividerItemComponent implements OnInit, OnDest
         // Get the parent navigation component
         this._dstVerticalNavigationComponent = this._dstNavigationService.getComponent(this.name);
 
+
+
         // Subscribe to onRefreshed on the navigation component
         this._dstVerticalNavigationComponent.onRefreshed.pipe(
             takeUntil(this._unsubscribeAll)
@@ -47,6 +50,8 @@ export class DstVerticalNavigationDividerItemComponent implements OnInit, OnDest
             // Mark for check
             this._changeDetectorRef.markForCheck();
         });
+      console.log(this._dstVerticalNavigationComponent)
+
     }
 
     /**

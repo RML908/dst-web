@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-
 import { LanguagesModule } from 'app/layout/common/languages/languages.module';
 import { MessagesModule } from 'app/layout/common/messages/messages.module';
 import { NotificationsModule } from 'app/layout/common/notifications/notifications.module';

@@ -6,11 +6,13 @@ import {DstLoadingModule} from "./services/loading";
 import {DstMediaWatcherModule} from "./services/media-watcher";
 import {DstPlatformModule} from "./services/platform/platform.module";
 import {DstSplashScreenModule} from "./services/splash-screen";
+import {DstConfirmationModule, DstConfirmationService} from "./services/confirmation";
 
 
 
 @NgModule({
   imports: [
+    DstConfirmationModule,
     DstLoadingModule,
     DstMediaWatcherModule,
     DstPlatformModule,

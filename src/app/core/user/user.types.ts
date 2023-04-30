@@ -34,5 +34,6 @@ export interface User {
   licanse_id: any;
   all_patients: number;
   image: string;
+  safeImageUrl?:any;
 }
 

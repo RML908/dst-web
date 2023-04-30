@@ -3,12 +3,12 @@
 
 /* This injects additional styles into Tailwind's base styles layer. */
 @layer base {
-    .text-warn {
-        color: #FF9800;
-    }
-    .text-primary {
-        color: #FF9800;
-    }
+    //.text-warn {
+    //    color: #FF9800;
+    //}
+    //.text-primary {
+    //    color: #FF9800;
+    //}
   * {
     /* Text rendering */
     text-rendering: optimizeLegibility;
@@ -32,7 +32,7 @@
     flex: 1 1 auto;
     width: 100%;
     min-height: 100%;
-    -webkit-font-smoothing: initial;
+    -webkit-font-smoothing: auto;
     -moz-osx-font-smoothing: auto;
   }
 

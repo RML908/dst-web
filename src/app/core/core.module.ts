@@ -5,9 +5,9 @@ import {IconsModule} from "./icons/icons.module";
 
 
 @NgModule({
-  declarations: [],
   imports: [
-    IconsModule
+    AuthModule,
+    IconsModule,
   ]
 })
 export class CoreModule {

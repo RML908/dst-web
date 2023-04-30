@@ -42,7 +42,6 @@ const layoutModules = [
         SharedModule,
         SettingsModule,
         ...layoutModules,
-        AuthSignInModule,
     ],
     exports     : [
         LayoutComponent,

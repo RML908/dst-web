@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { merge } from 'lodash-es';
 import { DstConfirmationDialogComponent} from '@dst/services/confirmation/dialog/dialog.component';
-import {DstConfirmationConfig,
-} from '@dst/services/confirmation/confirmation.types';
+import {DstConfirmationConfig} from '@dst/services/confirmation/confirmation.types';
 
 @Injectable()
 

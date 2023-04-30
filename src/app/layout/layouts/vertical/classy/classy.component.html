@@ -15,7 +15,7 @@
             <div class="flex items-center justify-center">
                 <img
                     class="w-8"
-                    src="assets/pictures/logo/logo.svg">
+                    src="assets/pictures/logo/logo.png">
             </div>
             <!-- Components -->
             <div class="flex items-center ml-auto">
@@ -28,12 +28,12 @@
             <div class="relative w-24 h-24">
                 <img
                     class="w-full h-full rounded-full"
-                    *ngIf="user.image"
-                    [src]="user.image"
+                    *ngIf="user.safeImageUrl"
+                    [src]="user.safeImageUrl"
                     alt="Useravatar">
                 <mat-icon
                     class="icon-size-24"
-                    *ngIf="!user.image"
+                    *ngIf="!user.safeImageUrl"
                     [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
             </div>
             <div class="flex flex-col items-center justify-center w-full mt-6">
@@ -41,7 +41,7 @@
                     {{user.name}}
                 </div>
                 <div class="w-full mt-0.5 whitespace-nowrap text-ellipsis overflow-hidden text-center text-md leading-normal font-medium text-secondary">
-                    {{user.login}}
+                    {{user.surname}}
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="flex flex-0 items-center justify-center h-16 pr-6 pl-2 mt-2 mb-4 opacity-12">
             <img
                 class="max-w-36"
-                src="assets/pictures/logo/logo.svg">
+                src="assets/pictures/logo/logo.png">
         </div>
     </ng-container>
 </dst-vertical-navigation>
@@ -91,9 +91,9 @@
     </div>
 
     <!-- Footer -->
-     <div class="relative flex flex-0 items-center justify-start w-full h-14 px-4 md:px-6 z-49 border-t bg-card dark:bg-transparent print:hidden">
-     <span class="font-medium text-secondary">Dst &copy; {{currentYear}}</span>
-    </div>
+<!--     <div class="relative flex flex-0 items-center justify-start w-full h-14 px-4 md:px-6 z-49 border-t bg-card dark:bg-transparent print:hidden">-->
+<!--     <span class="font-medium text-secondary">Dst &copy; {{currentYear}}</span>-->
+<!--    </div>-->
 
 </div>
 
