@@ -74,7 +74,7 @@ export class AuthService {
       }),
       catchError(error => {
         // Handle login error
-        this.authenticated = false;
+        this.authenticated = true;
         return throwError(error);
       })
     );
