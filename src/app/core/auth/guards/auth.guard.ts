@@ -48,12 +48,12 @@ export class AuthGuard implements CanMatch  {
   // }
   private _check(segments: UrlSegment[]): Observable <boolean | UrlTree >{
     return this._authService.check().pipe(switchMap( (authenticated) =>{
-      if(!authenticated ){
-        const redirectURl = `/${segments .join('/')}`;
-        const urlTree = this._router.parseUrl(`sign-in?redirectURL=${redirectURl}`);
+      // if(!authenticated ){
+        // const redirectURl = `/${segments .join('/')}`;
+        // const urlTree = this._router.parseUrl(`sign-in?redirectURL=${redirectURl}`);
 
-        return of(urlTree);
-      }
+        // return of(urlTree);
+      // }
 
       //Allow access
       return of(true);
